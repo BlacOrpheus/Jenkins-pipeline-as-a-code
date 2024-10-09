@@ -1,0 +1,25 @@
+{
+    "name": "sample-app",   
+    "version": "1.0.0",     
+    "description": "A sample JavaScript application",   
+    "main": "index.html",     
+    "scripts": {
+      "start": "node index.js",   
+      "build": "npm run build",   
+      "test": "npm test",         
+      "lint": "eslint .",         
+      "prettier": "prettier --write ."  
+    },
+    "author": "Chidubem Chinwuba",   
+    "license": "ISC",   
+    "dependencies": {    
+      "express": "^4.17.1",    
+      "mongoose": "^5.10.9"    
+    },
+    "devDependencies": {   
+      "eslint": "^7.11.0",    
+      "jest": "^26.6.3",      
+      "prettier": "^2.1.2"    
+    }
+  }
+  
