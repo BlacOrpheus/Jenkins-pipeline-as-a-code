@@ -1,0 +1,58 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git url: 'https://github.com/YourUsername/YourRepo.git', branch: 'main'
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                sh 'npm install'
+            }
+        }
+
+        stage('Lint') {
+            steps {
+                sh 'npm run lint' // Assuming you have a lint script defined
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh 'npm test'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'npm run build' // Assuming you have a build script defined
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                // Replace with your deployment commands, e.g., copying files to a server
+                sh '''
+                    echo "Deploying application..."
+                    # Example: Copy files to the server using SCP
+                    scp -r ./dist/* user@your-server-ip:/path/to/deploy/
+                    
+                    # Restart the application (example command, adjust as needed)
+                    ssh user@your-server-ip 'pm2 restart your-app-name' 
+                '''
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Deployment successful!'
+        }
+        failure {
+            echo 'Deployment failed!'
+        }
+    }
+}
